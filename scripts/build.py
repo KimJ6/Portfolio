@@ -99,6 +99,7 @@ def load():
         ids.add(p['id']); require(p['project_type'] in TYPES and p['status'] in STATES,f'{f}: invalid classification')
         for k in ('overview','problem','contribution','result'):
             require(nonempty(p['summary'].get(k)),f'{f}: missing/invalid summary.{k}')
+        require('display_label' not in p or isinstance(p['display_label'], str),f'{f}: invalid display_label')
         require(strings(p.get('technologies'),allow_empty=True),f'{f}: invalid technologies')
         require(strings(p.get('implementation_techniques',[]),allow_empty=True),f'{f}: invalid techniques')
         headings=[h['title'] for h in p['toc']]

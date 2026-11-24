@@ -7,6 +7,8 @@ category:
 - 게임 클라이언트 개발
 project_type: team
 status: unknown
+# 상단 표시 문구만 변경. 실제 참여 범위는 participation 및 본문에 유지.
+display_label: "Available on Steam"
 role:
 - 타일 파기 기믹 설계 및 구현
 - 기본 캐릭터 조작 설계 및 구현

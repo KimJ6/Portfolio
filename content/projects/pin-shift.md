@@ -7,16 +7,16 @@ category:
 - 2D 물리 시뮬레이션
 project_type: individual
 status: prototype
+# 상단 상태 표시만 생략. 실제 프로젝트 상태는 유지.
+display_label: ""
 role:
 - 게임 기획 및 시스템 설계
 - AI 보조 개발 및 검수
 technologies:
 - TypeScript
-- Box2D 3
-- WebAssembly (box2d3-wasm)
+- Box2D 3 (WASM)
 - Web Worker
 - PixiJS
-- CSV
 summary:
   overview: 핀의 배치와 물리적 특성을 조정하여 구슬의 낙하 경로를 설계하는 웹 기반 2D 물리 게임입니다.
   problem: 낙하 결과를 관찰하는 데 그치지 않고 물리적 환경을 직접 설계하고 개선하는 플레이 경험을 목표로 했습니다.
@@ -25,7 +25,13 @@ summary:
   resume: 물리 기반 게임 규칙, CSV 수치 관리 및 Worker와 렌더러의 책임을 설계하고 AI 보조 개발을 통해 예외 처리와 기본 규칙을 검증했습니다.
 featured: true
 order: 4
-media: []
+cover: gameplay
+media:
+- id: gameplay
+  src: assets/PinShifht.png
+  alt: PinShift 게임 화면
+  caption: PinShift 실행 화면
+  kind: screenshot
 links:
 - kind: demo
   label: PinShift 웹에서 플레이

@@ -20,6 +20,7 @@ UTF-8, 영문 소문자·숫자·하이픈 파일명, YAML Front Matter, CommonM
 | `project_type` | individual, team, collaborative |
 | `status` | planned, in-progress, prototype, completed, released, archived, unknown. 미확인은 화면에서 생략 |
 | `participation` | 선택 문자열, 개인의 참여 범위 |
+| `display_label` | 선택 문자열, 웹 프로젝트 상단에서 상태 및 참여 범위 표시를 대체. 빈 문자열이면 둘 다 숨김. 원본 상태와 참여 범위는 유지 |
 | `period.start`, `period.end` | 선택 날짜 문자열, 확인된 기간만 |
 | `role` | 비어 있지 않은 문자열 목록, 담당 역할 |
 | `technologies` | 실제 사용 기술 목록. 미확인 시 빈 배열 허용 |
