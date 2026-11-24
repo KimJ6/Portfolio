@@ -1,0 +1,13 @@
+{% macro meta(p) -%}
+<span>{{ types[p.project_type] }}</span>{% if states[p.status] %}<span>{{ states[p.status] }}</span>{% endif %}{% if p.participation %}<span>{{ p.participation }}</span>{% endif %}{% if p.period %}{% if p.period.start or p.period.end %}<span>{{ p.period.start or '' }}{% if p.period.end %} – {{ p.period.end }}{% endif %}</span>{% endif %}{% endif %}{% if p.publication %}<span>{{ p.publication.year }} · {{ p.publication.author_role }} 논문 게재</span>{% endif %}
+{%- endmacro %}
+{% macro media_image(item,prefix,zoom=false) -%}
+<div class="media-frame{% if zoom %} zoomable{% endif %}">{% if zoom %}<button class="zoom-trigger" type="button" data-caption="{{ item.caption|default('') }}" aria-label="{{ item.alt }} 확대">{% endif %}<img src="{{ asset_path(item.src,prefix) }}" alt="{{ item.alt }}" loading="lazy" decoding="async">{% if zoom %}</button>{% endif %}<div class="image-fallback" hidden>{{ item.alt }}<br>이미지를 불러올 수 없습니다.</div></div>
+{%- endmacro %}
+{% macro links(p) -%}
+{% for l in p.links %}<a class="text-link" href="{{ l.url }}">{{ l.label }} <span aria-hidden="true">↗</span></a>{% endfor %}
+{%- endmacro %}
+{% macro tech(p) -%}
+{% if p.technologies %}<div class="tech-list" aria-label="사용 기술">{% for t in p.technologies %}<span>{{ t }}</span>{% endfor %}</div>{% endif %}
+{% if p.implementation_techniques %}<p class="techniques"><strong>구현 기법</strong> {{ p.implementation_techniques|join(' · ') }}</p>{% endif %}
+{%- endmacro %}
