@@ -38,7 +38,7 @@ media:
 links:
 - kind: repository
   label: 렌더링 연구 소스 코드
-  url: https://github.com/KimJ6/pnu-cse_Massive-Instance-Rendering-Optimization
+  url: https://github.com/pnucse-capstone2026/capstone-2026-team-15
 - kind: paper
   label: 게재 논문 및 초록 (KCI)
   url: https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003380515
