@@ -8,7 +8,7 @@ UTF-8, 영문 소문자·숫자·하이픈 파일명, YAML Front Matter, CommonM
 
 ## 프로필
 
-필수: `nickname`, `interests`(문자열 목록), `headline`, `summary`, `links.github`, `updated_at`. 선택: `focus_technologies`, `links.email`, `links.linkedin`, `links.portfolio`. 슬로건은 단일 문자열이며 YAML `|-` 블록으로 줄바꿈을 지정할 수 있다. `PORTFOLIO_URL` 환경 변수가 실제 배포 주소를 제공하면 이력서 PDF에 우선 사용한다. 로컬 빌드에서 URL을 모르면 생략한다.
+필수: `nickname`, `interests`(문자열 목록), `headline`, `summary`, `links.github`, `updated_at`. 선택: `focus_technologies`, `links.email`, `links.linkedin`, `links.portfolio`. 슬로건은 단일 문자열이며 YAML `|-` 블록으로 줄바꿈을 지정할 수 있다. 선택 필드 `headline_emphasis`는 슬로건에 실제 존재하는 중복되지 않는 문자열 목록이며, 의미적 강조 대상만 지정한다. 색상과 표현은 [시각적 강조 및 테마 규격](visual-design.md)을 따른다. `PORTFOLIO_URL` 환경 변수가 실제 배포 주소를 제공하면 이력서 PDF에 우선 사용한다. 로컬 빌드에서 URL을 모르면 생략한다.
 
 ## 프로젝트
 

@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 import yaml
 from markdown_it import MarkdownIt
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from markupsafe import Markup
+from markupsafe import Markup, escape
 from weasyprint import HTML
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +15,24 @@ MD = MarkdownIt('commonmark', {'html': False}).enable('table')
 ENV = Environment(loader=FileSystemLoader(ROOT/'src/templates'), autoescape=select_autoescape(['html']))
 TYPES = {'individual':'개인 프로젝트','team':'팀 프로젝트','collaborative':'공동 연구'}
 STATES = {'planned':'기획 단계','in-progress':'개발 중','prototype':'프로토타입','completed':'완료','released':'공개','archived':'기록 보존','unknown':''}
+
+# Semantic emphasis, independent of theme and Markdown presentation.
+CORE_SECTIONS = frozenset((
+    '문제 정의', '역할 및 기여', '설계 및 구현',
+    '플레이 및 실행 구조 설계', '결과 및 검증', '인사이트 및 한계',
+))
+
+def highlight_terms(value, terms):
+    """Escape the entire source; wrap only explicitly designated terms."""
+    if not terms:
+        return escape(value)
+    pattern = re.compile('(' + '|'.join(re.escape(t) for t in sorted(terms, key=len, reverse=True)) + ')')
+    return Markup('').join(
+        Markup('<span class="headline-accent">{}</span>').format(part) if i % 2 else escape(part)
+        for i, part in enumerate(pattern.split(value))
+    )
+
+ENV.filters['highlight_terms'] = highlight_terms
 
 def require(condition, message):
     if not condition: raise ValueError(message)
@@ -47,6 +65,8 @@ def render_md(body):
         if t.type=='heading_open' and t.tag=='h2':
             ident = f'section-{len(toc)+1}'
             t.attrSet('id',ident)
+            if title in CORE_SECTIONS:
+                t.attrJoin('class','section-accent')
             toc.append({'id':ident,'title':tokens[i+1].content})
     return Markup(MD.renderer.render(tokens,MD.options,{})), toc
 
@@ -74,6 +94,10 @@ def load():
         require(profile.get(k),f'profile: missing {k}')
     require(all(nonempty(profile.get(k)) for k in ('nickname','headline','summary')), 'profile: invalid text')
     require(strings(profile['interests']) and strings(profile.get('focus_technologies',[]),allow_empty=True),'profile: invalid lists')
+    emphasis=profile.get('headline_emphasis',[])
+    require(strings(emphasis,allow_empty=True),'profile: invalid headline_emphasis')
+    require(len(emphasis)==len(set(emphasis)) and all(t in profile['headline'] for t in emphasis),'profile: duplicate or missing headline emphasis term')
+    require(not any(a != b and a in b for a in emphasis for b in emphasis),'profile: overlapping headline emphasis terms')
     require(isinstance(profile.get('links'),dict) and valid_url(profile['links'].get('github')),'profile: invalid github')
     for k in ('portfolio','linkedin'):
         require(k not in profile['links'] or valid_url(profile['links'][k]), f'profile: invalid {k} URL')

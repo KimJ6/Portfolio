@@ -5,6 +5,8 @@ interests: []
 focus_technologies: []
 # 핵심 슬로건. 여러 줄이면 |- 사용.
 headline: ""
+# 선택: 슬로건에서 강조할 정확한 핵심 개념. 색상은 CSS에서 관리.
+headline_emphasis: []
 # 자기소개 및 개발 관점. 불필요한 반복과 자기 평가를 지양한다.
 summary: ""
 links:
